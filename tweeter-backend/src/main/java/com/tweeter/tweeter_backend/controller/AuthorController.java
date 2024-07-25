@@ -6,25 +6,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tweeter.tweeter_backend.model.User;
-import com.tweeter.tweeter_backend.service.UserService;
+import com.tweeter.tweeter_backend.model.Author;
+import com.tweeter.tweeter_backend.service.AuthorService;
 
 @RestController("/api/user")
-public class UserController {
+public class AuthorController {
 
-  UserService userService;
+  AuthorService userService;
 
-  public UserController(UserService userService) {
+  public AuthorController(AuthorService userService) {
     this.userService = userService;
   }
 
   @GetMapping("/id/{id}")
-  private Optional<User> getUserById(@PathVariable Integer id) {
+  private Optional<Author> getUserById(@PathVariable Integer id) {
     return this.userService.getUserById(id);
   }
 
   @GetMapping("/username/{username}")
-  private Optional<User> getUserById(@PathVariable String username) {
+  private Optional<Author> getUserById(@PathVariable String username) {
     return this.userService.getUserByUsername(username);
   }
 
