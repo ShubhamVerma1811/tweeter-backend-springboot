@@ -9,14 +9,27 @@ import com.tweeter.tweeter_backend.repo.TweetRepo;
 
 @Service
 public class TweetService {
-  TweetRepo TweetRepo;
+  TweetRepo tweetRepo;
 
   public TweetService(TweetRepo TweetRepo) {
-    this.TweetRepo = TweetRepo;
+    this.tweetRepo = TweetRepo;
   }
 
   public Optional<Tweet> getTweetById(Integer id) {
-    return this.TweetRepo.findById(id);
+    return this.tweetRepo.findById(id);
+  }
+
+  public Tweet createTweet(Tweet tweet) {
+    return this.tweetRepo.save(tweet);
+  }
+
+  public Tweet updateTweet(Tweet tweet) {
+    return this.tweetRepo.save(tweet);
+  }
+
+  // TODO:: verify status
+  public void deleteTweetById(Integer id) {
+    this.tweetRepo.deleteById(id);
   }
 
 }
