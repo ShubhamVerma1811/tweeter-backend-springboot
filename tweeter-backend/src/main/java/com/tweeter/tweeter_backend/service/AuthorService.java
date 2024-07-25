@@ -9,18 +9,36 @@ import com.tweeter.tweeter_backend.repo.AuthorRepo;
 
 @Service
 public class AuthorService {
-  AuthorRepo userRepo;
+  AuthorRepo authorRepo;
 
-  public AuthorService(AuthorRepo userRepo) {
-    this.userRepo = userRepo;
+  private AuthorService(AuthorRepo authorRepo) {
+    this.authorRepo = authorRepo;
   }
 
+  // public List<Author> getAllAuthors() {
+  // return this.authorRepo.findAll();
+  // }
+
   public Optional<Author> getUserById(Integer id) {
-    return this.userRepo.findById(id);
+    return this.authorRepo.findById(id);
+
   }
 
   public Optional<Author> getUserByUsername(String username) {
-    return this.userRepo.findUserByUsername(username);
+    return this.authorRepo.findUserByUsername(username);
+  }
+
+  public Author createAuthor(Author author) {
+    return this.authorRepo.save(author);
+  }
+
+  public Author updateAuthor(Author author) {
+    return this.authorRepo.save(author);
+  }
+
+  // TODO:: verify status
+  public void deleteAuthorById(Integer id) {
+    this.authorRepo.deleteById(id);
   }
 
 }

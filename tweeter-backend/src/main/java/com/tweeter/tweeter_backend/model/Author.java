@@ -1,76 +1,52 @@
 package com.tweeter.tweeter_backend.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = "email"),
+    @UniqueConstraint(columnNames = "username")
+}, indexes = {
+    @Index(columnList = "username")
+})
+@Getter
+@Setter
+@NoArgsConstructor
 public class Author {
   @Id
-  Integer id;
-  String bio;
-  String email;
-  String name;
-  String username;
-  String profilePicture;
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private Integer id;
 
-  public Author() {
-  }
+  private String bio;
 
-  public Author(Integer id, String bio, String email, String name, String username, String profilePicture) {
-    this.id = id;
-    this.bio = bio;
-    this.email = email;
-    this.name = name;
-    this.username = username;
-    this.profilePicture = profilePicture;
-  }
+  @Column(nullable = false)
+  private String email;
 
-  public Integer getId() {
-    return id;
-  }
+  @Column(nullable = false)
+  private String name;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+  @Column(nullable = false)
+  private String username;
 
-  public String getBio() {
-    return bio;
-  }
+  private String profilePicture;
 
-  public void setBio(String bio) {
-    this.bio = bio;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public String getProfilePicture() {
-    return profilePicture;
-  }
-
-  public void setProfilePicture(String profilePicture) {
-    this.profilePicture = profilePicture;
-  }
-
+  @JsonManagedReference
+  @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+  private List<Tweet> tweets;
 }
