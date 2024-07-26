@@ -2,9 +2,9 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_USER=postgres'
-      - 'POSTGRES_PASSWORD=password'
-      - 'POSTGRES_DB=tweeter'
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tweeter
     ports:
       - '5432:5432'
 
