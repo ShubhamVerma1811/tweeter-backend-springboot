@@ -29,7 +29,7 @@ public class AuthorController {
   // return this.authorService.getAllAuthors();
   // }
 
-  @GetMapping("/id/{id}")
+  @GetMapping("/{id}")
   protected Optional<Author> getUserById(@PathVariable Integer id) {
     return this.authorService.getUserById(id);
   }
@@ -44,12 +44,12 @@ public class AuthorController {
     return this.authorService.createAuthor(author);
   }
 
-  @PutMapping("/")
+  @PutMapping("/{id}")
   public Author updateAuthor(@RequestBody Author author) {
     return this.authorService.updateAuthor(author);
   }
 
-  @DeleteMapping("/id/{id}")
+  @DeleteMapping("/{id}")
   public void deleteAuthor(@PathVariable Integer id) {
     this.authorService.deleteAuthorById(id);
   }

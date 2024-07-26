@@ -1,5 +1,6 @@
 package com.tweeter.tweeter_backend.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,17 +30,22 @@ public class TweetController {
     return this.tweetService.getTweetById(id);
   }
 
+  @GetMapping("/author/{id}")
+  private List<Tweet> findTweetsByAuthorId(@PathVariable Integer id) {
+    return this.tweetService.getTweetsByAuthorId(id);
+  }
+
   @PostMapping("/")
   private Tweet createTweet(@RequestBody Tweet tweet) {
     return this.tweetService.createTweet(tweet);
   }
 
-  @PutMapping("/")
+  @PutMapping("/{id}")
   public Tweet updateTweet(@RequestBody Tweet tweet) {
     return this.tweetService.updateTweet(tweet);
   }
 
-  @DeleteMapping("/id/{id}")
+  @DeleteMapping("/{id}")
   public void deleteTweet(@PathVariable Integer id) {
     this.tweetService.deleteTweetById(id);
   }

@@ -1,5 +1,6 @@
 package com.tweeter.tweeter_backend.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class TweetService {
 
   public Optional<Tweet> getTweetById(Integer id) {
     return this.tweetRepo.findById(id);
+  }
+
+  public List<Tweet> getTweetsByAuthorId(Integer id) {
+    return this.tweetRepo.findTweetsByAuthorId(id);
   }
 
   public Tweet createTweet(Tweet tweet) {
